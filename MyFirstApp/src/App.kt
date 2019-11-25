@@ -1,22 +1,18 @@
-fun main() {
-    val weight =100
-    val grewup = 170
-    val index = bodyMassIndex (100.0, 170.0)
-    val verdict = when(index) {
-        in 0.0..16.0 -> "Выраженный дефицит массы тела"
-        in 16.1..18.51 -> "Недостаточная (дефицит) масса тела"
-        in 18.51..24.99 -> "Норма"
-        in 25.0..30.0 -> "Избыточная масса тела (предожирение)"
-        in 30.1..35.0 -> "Ожирение"
-        in 35.1..40.0 -> "Ожирение резкое"
-        else ->"Очень резкое ожирение"
+fun main(args: Array <String>) {
+    val amount = 200
+    val totalamount = 11000
+    val fee = calculateFee(200, 11000, false)  // exclusive по умолчанию = false
+    println(fee)
+}
+
+
+fun calculateFee(amount: Int, totalamount: Int,exlusive: Boolean = false) : Int {
+    var freePrecent = when (totalamount) {
+        in 0..1000 -> 30
+        in 1001..10000 -> 25
+        in 10001..50000 -> 20
+        else -> 15
     }
-    println(verdict)
+    return amount * (freePrecent - if (exlusive) 5 else 0)/100
 
 }
-
-fun bodyMassIndex (weight:Double, grewup: Double): Double {
-    val grewupM = grewup / 100
-    return weight / (grewupM * grewupM)
-}
-
